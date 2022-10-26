@@ -51,23 +51,11 @@ function Server_Time():string
     </div>";
 }
 
-function Server_Weather():string
-{
-    return "
-            <div style='width: 25%; display: grid'>
-                <form method='post'>
-                    <input type='submit' class='w3-button' value='blackout' id='blackout' name='blackout' style='width: 100%'>
-                    <input type='submit' class='w3-button' value='clear' id='clear' name='clear' style='width: 100%'>
-                    <input type='submit' class='w3-button' value='rain' id='rain' name='rain' style='width: 100%'>
-                    <input type='submit' class='w3-button' value='thunder' id='thunder' name='thunder' style='width: 100%'>
-                </form>
-            </div>
-    ";
-}
+
 ?>
 
 <head>
-    <title>QB-admin - Main</title>
+    <title>QB-admin - Server</title>
     <?=css()?>
 </head>
 <body>
