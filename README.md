@@ -1,6 +1,6 @@
 ### Setup
 
-Use my qb-api resource
+Use my qb-api resource (github.com/legende11/qb-api/)
 
 Host site on a server on path /qb-admin/
 
