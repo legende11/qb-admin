@@ -4,6 +4,7 @@ Use my qb-api resource (github.com/legende11/qb-api/)
 
 Host site on a server on path /qb-admin/
 
+Edit api.php & database.php to match your database/server
 ### Usage
 
 Login with your username and password<br>
