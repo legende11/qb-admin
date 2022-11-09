@@ -10,9 +10,9 @@ if(!array_key_exists('username', $_SESSION)) {
 
 
 if(array_key_exists('reason', $_POST)) {
-    $reden = str_replace(' ', '_', $_POST['reason']);
-    $reden = str_replace('/', '-', $reden);
-    Api_Request("kickall/$reden");
+    $reason = str_replace(' ', '_', $_POST['reason']);
+    $reason = str_replace('/', '-', $reason);
+    Api_Request("kickall/$reason");
 
 }
 
@@ -37,7 +37,7 @@ function Players_Table_Generate(): string
         <tr>
             <td>$player</td>
             <td>$firstname $lastname</td>
-            <td>Contant: $cash -Bank: $bank -Crypto: $crypto</td>
+            <td>Cash: $cash -Bank: $bank -Crypto: $crypto</td>
             <td>$job - $grade</td>
             <td>$ping</td>
             <td><button class='w3-button' onclick='location.href = `./beheer.php?id=$player`' style='height: 25%'><bold>Beheer</bold></button></td>
@@ -55,10 +55,10 @@ function Players_Table(): string
         <tr>
             <th>ID</th>
             <th>Charname</th>
-            <th>Geld</th>
-            <th>Baan</th>
+            <th>Money</th>
+            <th>Job</th>
             <th>Ping</th>
-            <th>Beheer</th>
+            <th>More</th>
         </tr>
         $table
     </table>
@@ -70,14 +70,14 @@ function Player_KickAll():string
 {
     return "
     <div style='margin-right: auto; display: grid'>
-        <form method='post' style='margin:auto'><input type='submit' id='kickall' name='kickall' value='⚠️Kick iedereen⚠️' class='w3-button w3-center'><input type='text' id='reason' name='reason' value='Reden' class='input w3-center'></form>
+        <form method='post' style='margin:auto'><input type='submit' id='kickall' name='kickall' value='⚠️Kick everyone⚠️' class='w3-button w3-center'><input type='text' id='reason' name='reason' value='reason' class='input w3-center'></form>
     </div>
     ";
 }
 ?>
 
 <head>
-    <title>QB-admin - Spelers</title>
+    <title>QB-admin - Players</title>
     <?=css()?>
 </head>
 <body>
