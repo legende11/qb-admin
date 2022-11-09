@@ -1,21 +1,14 @@
 <?php
 session_start();
 
-function GetConnection():mysqli
+function GetConnection():PDO
 {
     $servername = "localhost";
     $username = "root";
     $password = "";
 
     // Create connection
-    $conn = mysqli_connect($servername, $username, $password, "qbox-test");
-
-    // Check connection
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    return $conn;
-
+    return new PDO("mysql:host=$servername;dbname=qbox-test", $username, $password);
 }
 
 
@@ -23,11 +16,17 @@ function GetConnection():mysqli
 function Database_Login($username, $password): bool
 {
     $conn = GetConnection();
-    $sanitized_username = mysqli_real_escape_string($conn, $username);
-    $sanitized_password = mysqli_real_escape_string($conn, sha1($password));
-    $result = $conn -> query("SELECT username FROM `admin-login` WHERE username = '$sanitized_username' AND password = '$sanitized_password';");
-    $conn -> close();
-    return count($result -> fetch_all()) != 0;
+    $prep = $conn -> prepare("SELECT username, password FROM `admin-login` WHERE username = :username;");
+    $prep -> bindParam(":username", $username);
+    $prep -> execute();
+    foreach ($prep -> fetchAll() as $item) {
+        if(array_key_exists('password', $item )) {
+            if(password_verify($password, $item['password'])) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 
@@ -35,8 +34,9 @@ function Database_Api(): string
 {
     $conn = GetConnection();
     $random = RandomString(20);
-    $conn -> query("INSERT into `api` SET `key` = '$random';");
-    $conn -> close();
+    $prep = $conn -> prepare("INSERT into `api` SET `key` = :apikey;");
+    $prep -> bindParam(":apikey", $random);
+    $prep -> execute();
     return $random;
 }
 
