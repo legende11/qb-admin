@@ -16,6 +16,10 @@ if(!isset($player -> cid)) {
     // Making sure the player is online and the ID is there
 }
 
+if(!isset($id)) {
+    header("location: ./");
+}
+
 
 
 function beheer_ButtonsLeft():string
